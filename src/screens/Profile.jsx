@@ -1,6 +1,6 @@
 import "./Profile.css";
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { Navbar } from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import { userRepositories } from "../api/repository";
@@ -10,11 +10,20 @@ import { Code } from "../components/Code";
 import { MdContentCopy } from "react-icons/md";
 
 export const Profile = () => {
+	const [token, setToken] = useState("");
+	const [open, setOpen] = useState(false);
 	const [images, setImages] = useState([]);
-	const [userloggedIn, setUserloggedIn] = useState(false);
 	const [isSettings, setIsSettings] = useState(false);
 
 	const { user } = useParams();
+
+	const handleTooltipClose = () => {
+		setOpen(false);
+	};
+
+	const handleTooltipOpen = () => {
+		setOpen(true);
+	};
 
 	async function getImages(user) {
 		const repos = await userRepositories(user);
@@ -24,7 +33,7 @@ export const Profile = () => {
 	async function checkIfuserLoggedIn() {
 		const token = localStorage.getItem("token");
 		if (token && token !== "") {
-			setUserloggedIn(true);
+			setToken(token);
 		}
 	}
 
@@ -43,7 +52,7 @@ export const Profile = () => {
 							<p>Images</p>
 							<BsFiles />
 						</Box>
-						{userloggedIn && (
+						{token !== "" && (
 							<Box onClick={() => setIsSettings(true)} className="item">
 								<p>Settings</p>
 								<IoSettingsOutline />
@@ -66,29 +75,40 @@ export const Profile = () => {
 							/>
 							<br />
 							<h3>Token</h3>
-
-							<Box
-								sx={{
-									fontFamily: "monospace",
-									borderRadius: "8px",
-									backgroundColor: "rgb(225, 225, 225)",
-									padding: "12px",
-									mt: 3,
-									display: "flex",
-									alignItems: "center",
-									justifyContent: "space-between",
-                                    width:"fit-content"
-								}}
+							<Tooltip
+								title="Copied!"
+								placement="top"
+								open={open}
+								onClose={handleTooltipClose}
 							>
-								Click to copy the token
-								<MdContentCopy
-									style={{
-										marginLeft: "12px",
+								<Box
+									sx={{
+										fontFamily: "monospace",
+										borderRadius: "8px",
+										backgroundColor: "rgb(225, 225, 225)",
+										padding: "12px",
+										mt: 3,
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "space-between",
+										width: "fit-content",
+										cursor: "pointer",
 									}}
-									size={20}
-									className="copy-icon"
-								/>
-							</Box>
+									onClick={() => {
+										navigator.clipboard.writeText(token);
+										handleTooltipOpen();
+									}}
+								>
+									Click to copy the token
+									<MdContentCopy
+										style={{
+											marginLeft: "12px",
+										}}
+										size={20}
+										className="copy-icon"
+									/>
+								</Box>
+							</Tooltip>
 						</Box>
 					) : (
 						<Box sx={{ flex: 1 }}>

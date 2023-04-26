@@ -1,18 +1,42 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Tooltip } from "@mui/material";
+import React, { useState } from "react";
 import { MdContentCopy } from "react-icons/md";
 
 export const Code = ({ text = "", sx = {} }) => {
+	const [open, setOpen] = useState(false);
+
+	const handleTooltipClose = () => {
+		setOpen(false);
+	};
+
+	const handleTooltipOpen = () => {
+		setOpen(true);
+	};
+
 	return (
-		<Box className="copy-code" sx={sx}>
-			<p>{text}</p>
-			<MdContentCopy
-				style={{
-					marginLeft: "12px",
+		<Tooltip
+			title="Copied!"
+			placement="top"
+			open={open}
+			onClose={handleTooltipClose}
+		>
+			<Box
+				onClick={() => {
+					navigator.clipboard.writeText(text);
+					handleTooltipOpen();
 				}}
-				size={20}
-				className="copy-icon"
-			/>
-		</Box>
+				className="copy-code"
+				sx={sx}
+			>
+				<p>{text}</p>
+				<MdContentCopy
+					style={{
+						marginLeft: "12px",
+					}}
+					size={20}
+					className="copy-icon"
+				/>
+			</Box>
+		</Tooltip>
 	);
 };
