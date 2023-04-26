@@ -46,7 +46,7 @@ export const Profile = () => {
 		<Box>
 			<Navbar />
 			<Box sx={{ px: "256px", display: "flex", flexDirection: "column" }}>
-				<Box className="body">
+				<Box className="profile">
 					<Box className="profile-navigation">
 						<Box onClick={() => setIsSettings(false)} className="item">
 							<p>Images</p>
