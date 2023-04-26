@@ -2,10 +2,11 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 40px 256px;
+	position: relative;
 }
 
 .navbar .upload-button {
-	background-color: rgb(41, 91, 255);
+	background-color: #f45966;
 	color: white;
 	padding: 8px 16px;
 	border-radius: 4px;
@@ -26,4 +27,3 @@
 	align-items: center;
 	justify-content: center;
 }
-
