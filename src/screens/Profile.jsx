@@ -8,12 +8,17 @@ import { BsFiles } from "react-icons/bs";
 import { IoSettingsOutline } from "react-icons/io5";
 import { Code } from "../components/Code";
 import { MdContentCopy } from "react-icons/md";
+import { TagsDialog } from "../components/TagsDialog";
+import { Loader } from "../components/Loader";
 
 export const Profile = () => {
+	const [loading, setLoading] = useState(true);
+	const [name, setName] = useState("");
 	const [token, setToken] = useState("");
 	const [open, setOpen] = useState(false);
 	const [images, setImages] = useState([]);
 	const [isSettings, setIsSettings] = useState(false);
+	const [tagsDialogOpen, setTagsDialogOpen] = useState(false);
 
 	const { user } = useParams();
 
@@ -26,8 +31,10 @@ export const Profile = () => {
 	};
 
 	async function getImages(user) {
+		setLoading(true);
 		const repos = await userRepositories(user);
 		setImages(repos);
+		setLoading(false);
 	}
 
 	async function checkIfuserLoggedIn() {
@@ -35,6 +42,10 @@ export const Profile = () => {
 		if (token && token !== "") {
 			setToken(token);
 		}
+	}
+
+	function handleTagDialogClose() {
+		setTagsDialogOpen(false);
 	}
 
 	useEffect(() => {
@@ -112,33 +123,60 @@ export const Profile = () => {
 						</Box>
 					) : (
 						<Box sx={{ flex: 1 }}>
-							{images.map((d, i) => {
-								const img = d.data;
-								return (
-									<Box className="repoimage" key={i}>
-										<Box
-											display="flex"
-											alignItems={"center"}
-											justifyContent={"space-between"}
-										>
-											<Box>
-												<h3>{img.name}</h3>
-												<Box className="tag">:{img.tag}</Box>
+							<TagsDialog
+								name={name}
+								isOpen={tagsDialogOpen}
+								handleExternalClose={handleTagDialogClose}
+							/>
+							{loading ? (
+								<Loader />
+							) : (
+								images.map((d, i) => {
+									const img = d.data;
+									return (
+										<Box className="repoimage" key={i}>
+											<Box
+												display="flex"
+												alignItems={"center"}
+												justifyContent={"space-between"}
+											>
+												<Box>
+													<h3>{img.name}</h3>
+													<Box>
+														<Box className="tag">:{img.tag}</Box>
+														<p
+															style={{
+																fontWeight: "500",
+																fontSize: "12px",
+																marginTop: "4px",
+																textDecoration: "underline",
+																color: "blue",
+																cursor: "pointer",
+															}}
+															onClick={() => {
+																setName(img.name);
+																setTagsDialogOpen(true);
+															}}
+														>
+															view tags
+														</p>
+													</Box>
+												</Box>
+												<Code text={`dedocker pull ${img.name}:${img.tag}`} />
 											</Box>
-											<Code text={`dedocker pull ${img.name}:${img.tag}`} />
+											<p
+												style={{
+													marginTop: "12px",
+													fontWeight: "500",
+													fontSize: "12px",
+												}}
+											>
+												Uploaded at {new Date(img.timestamp).toDateString()}
+											</p>
 										</Box>
-										<p
-											style={{
-												marginTop: "12px",
-												fontWeight: "500",
-												fontSize: "12px",
-											}}
-										>
-											Uploaded at {new Date(img.timestamp).toDateString()}
-										</p>
-									</Box>
-								);
-							})}
+									);
+								})
+							)}
 						</Box>
 					)}
 				</Box>

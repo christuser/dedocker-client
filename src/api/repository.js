@@ -20,7 +20,7 @@ export const searchRepositories = async function (name) {
     } catch (error) {
         console.log(error.message);
     }
-} 
+}
 
 
 export const userRepositories = async function (user) {
@@ -32,4 +32,15 @@ export const userRepositories = async function (user) {
     } catch (error) {
         console.log(error.message);
     }
-} 
+}
+
+export const getRepoTags = async function (name) {
+    try {
+        const response = await axios.get("http://localhost:3000/repository/tags/" + name)
+        if (response.status === 200) {
+            return response.data.repositories;
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+}

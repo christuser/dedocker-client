@@ -119,7 +119,7 @@ export const Navbar = () => {
 								<MenuItem
 									onClick={() => {
 										const address = localStorage.getItem("address");
-										navigate("profile/" + address);
+										navigate("/profile/" + address);
 										setAnchorEl(null);
 									}}
 								>
