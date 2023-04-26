@@ -49,10 +49,15 @@ export const Navbar = () => {
 					width: "100vw",
 					height: "100vh",
 					filter: "brightness(2)",
+					zIndex: -1,
 				}}
 			></Box>
 			<div className="navbar">
-				<div>
+				<div
+					onClick={() => {
+						window.location.replace("/");
+					}}
+				>
 					<h1>⚡Dedocker</h1>
 				</div>
 				<div
@@ -62,6 +67,10 @@ export const Navbar = () => {
 						justifyContent: "center",
 					}}
 				>
+					<Box className="navlist">
+						<p onClick={() => window.location.replace("/explore")}>Explore</p>
+						<p>Github</p>
+					</Box>
 					{!connectedToSite ? (
 						<Box onClick={connectSite} className="upload-button">
 							Connect Wallet

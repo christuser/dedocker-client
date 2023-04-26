@@ -27,3 +27,20 @@
 	align-items: center;
 	justify-content: center;
 }
+
+.navbar .navlist {
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	margin-right: 8px;
+}
+
+.navbar .navlist p {
+	margin: 0px 4px;
+}
+
+.navbar .navlist p:hover {
+	text-decoration: underline;
+}
