@@ -48,9 +48,22 @@ export const Explore = () => {
 	}, [query]);
 
 	return (
-		<Box>
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+			}}
+		>
 			<Navbar />
-			<Box sx={{ px: "256px", display: "flex", flexDirection: "column" }}>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					width: "100%",
+					maxWidth: "840px",
+				}}
+			>
 				<Box sx={{ display: "flex", justifyContent: "space-between" }}>
 					<h2>Explore</h2>
 					<SearchComponent />

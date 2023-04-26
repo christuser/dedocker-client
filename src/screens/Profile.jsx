@@ -54,9 +54,22 @@ export const Profile = () => {
 	}, [user]);
 
 	return (
-		<Box>
+		<Box
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+			}}
+		>
 			<Navbar />
-			<Box sx={{ px: "256px", display: "flex", flexDirection: "column" }}>
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					width: "100%",
+					maxWidth: "840px",
+				}}
+			>
 				<Box className="profile">
 					<Box className="profile-navigation">
 						<Box onClick={() => setIsSettings(false)} className="item">
