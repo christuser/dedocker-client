@@ -42,7 +42,15 @@ export const Navbar = () => {
 	}, []);
 
 	return (
-		<Box sx={{ position: "relative" }}>
+		<Box
+			sx={{
+				position: "relative",
+				width: "100%",
+				display: "flex",
+				alignItems: "center",
+				flexDirection: "column",
+			}}
+		>
 			<Box
 				sx={{
 					p: 1,
@@ -51,6 +59,7 @@ export const Navbar = () => {
 					justifyContent: "center",
 					backgroundColor: "#ff92a2",
 					color: "white",
+					width: "100%",
 					fontWeight: "700",
 				}}
 			>

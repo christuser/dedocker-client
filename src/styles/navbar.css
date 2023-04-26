@@ -1,8 +1,10 @@
 .navbar {
 	display: flex;
 	justify-content: space-between;
-	padding: 40px 256px;
+	padding: 40px 0px;
 	position: relative;
+	width: 100%;
+	max-width: 1080px;
 }
 
 .navbar .upload-button {
