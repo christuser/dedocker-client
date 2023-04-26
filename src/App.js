@@ -5,6 +5,7 @@ import "./styles/app-body.css";
 import { Home } from './screens/Home';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Explore } from './screens/Explore';
+import { Profile } from './screens/Profile';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/explore" exact element={<Explore />} />
+        <Route path="/profile/:user" exact element={<Profile />} />
       </Routes>
     </Router>
   );

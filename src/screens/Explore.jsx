@@ -4,10 +4,10 @@ import { Navbar } from "../components/Navbar";
 import React, { useEffect, useState } from "react";
 import { getRepositories, searchRepositories } from "../api/repository";
 import { SearchComponent } from "../components/search/SearchComponent";
-import { MdContentCopy } from "react-icons/md";
 import { IoMdOpen } from "react-icons/io";
 import { getShortAddress } from "../utils/addressShort";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Code } from "../components/Code";
 
 export const Explore = () => {
 	const [images, setImages] = useState([]);
@@ -56,18 +56,7 @@ export const Explore = () => {
 										<h3>{img.name}</h3>
 										<Box className="tag">:{img.tag}</Box>
 									</Box>
-									<Box className="copy-code">
-										<p>
-											dedocker pull {img.name}:{img.tag}
-										</p>
-										<MdContentCopy
-											style={{
-												marginLeft: "12px",
-											}}
-											size={20}
-											className="copy-icon"
-										/>
-									</Box>
+									<Code text={`dedocker pull ${img.name}:${img.tag}`} />
 								</Box>
 								<p
 									style={{

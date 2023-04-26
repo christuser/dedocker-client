@@ -1,0 +1,29 @@
+.body {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.body .profile-navigation {
+	border-right: 0.5px solid rgb(199, 199, 199);
+	margin-right: 12px;
+}
+
+.body .profile-navigation .item {
+	font-weight: 500;
+	padding: 12px 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.body .profile-navigation .item p {
+	margin-right: 8px;
+}
+
+.body .profile-navigation .item:hover {
+	box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
+	background-color: rgb(237, 237, 237);
+}

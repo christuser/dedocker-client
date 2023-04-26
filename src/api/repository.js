@@ -21,3 +21,15 @@ export const searchRepositories = async function (name) {
         console.log(error.message);
     }
 } 
+
+
+export const userRepositories = async function (user) {
+    try {
+        const response = await axios.get("http://localhost:3000/repository/user/" + user)
+        if (response.status === 200) {
+            return response.data.repositories;
+        }
+    } catch (error) {
+        console.log(error.message);
+    }
+} 
