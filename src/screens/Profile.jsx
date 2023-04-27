@@ -10,6 +10,7 @@ import { Code } from "../components/Code";
 import { MdContentCopy } from "react-icons/md";
 import { TagsDialog } from "../components/TagsDialog";
 import { Loader } from "../components/Loader";
+import EmptyBox from "../assets/629-empty-box.gif";
 
 export const Profile = () => {
 	const [loading, setLoading] = useState(true);
@@ -143,6 +144,24 @@ export const Profile = () => {
 							/>
 							{loading ? (
 								<Loader />
+							) : images.length === 0 ? (
+								<Box
+									sx={{
+										width: "100%",
+										alignItems: "center",
+										flexDirection: "column",
+										display: "flex",
+										backgroundColor: "white",
+										borderRadius: "8px",
+										p: 3,
+									}}
+								>
+									<img width={"100px"} src={EmptyBox} alt="empty box" />
+									<h3 style={{ color: "grey",marginTop:"12px", textAlign: "center" }}>
+										You have 0 images, Try uploading images from CLI, click
+										settings to know more😃
+									</h3>
+								</Box>
 							) : (
 								images.map((d, i) => {
 									const img = d.data;

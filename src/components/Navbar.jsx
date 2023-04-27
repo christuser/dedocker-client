@@ -3,12 +3,14 @@ import { Box, Menu, MenuItem } from "@mui/material";
 import { BsPerson } from "react-icons/bs";
 import BgImg from "../assets/background-spheron.png";
 import { connectWalletToSite, getWalletAddress } from "../utils/wallet";
-import { createUser } from "../api/user";
+import { createUser, getUser } from "../api/user";
 import { HiOutlineLogout } from "react-icons/hi";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { UpdateNameDialog } from "./UpdateNameDialog";
 
 export const Navbar = () => {
+	const [updateName, setUpdateName] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const open = Boolean(anchorEl);
 	const navigate = useNavigate();
@@ -27,18 +29,28 @@ export const Navbar = () => {
 		if (address && address !== "") {
 			let token = localStorage.getItem("token");
 			localStorage.setItem("address", address);
-			if (!token || token === "") {
+			if (!token || token === "" || token === "undefined") {
 				await createUser(address);
 			}
 			token = localStorage.getItem("token");
-			if (token && token !== "") {
+			if (token && token !== "" && token !== "undefined") {
+				console.log(typeof token, token);
 				setConnectedToSite(true);
+				checkAndUpdateNameDialog(address);
 			}
+		}
+	}
+
+	async function checkAndUpdateNameDialog(address) {
+		const user = await getUser(address);
+		if (!user.updatedUsername) {
+			setUpdateName(true);
 		}
 	}
 
 	useEffect(() => {
 		connectSite();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -51,6 +63,7 @@ export const Navbar = () => {
 				flexDirection: "column",
 			}}
 		>
+			<UpdateNameDialog isOpen={updateName} />
 			<Box
 				sx={{
 					p: 1,
