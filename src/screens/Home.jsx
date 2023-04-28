@@ -102,7 +102,7 @@ export const Home = () => {
 								<IoMdOpen style={{ color: "black" }} />
 							</Box>
 							<Code
-								text="$ npm install dedocker"
+								text="$ npm install -g dedocker"
 								sx={{ width: "fit-content" }}
 							/>
 							<Box className="homepage-footer">
