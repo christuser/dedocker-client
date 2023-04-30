@@ -74,9 +74,16 @@ export const Navbar = () => {
 					color: "white",
 					width: "100%",
 					fontWeight: "700",
+					cursor: "pointer",
 				}}
+				onClick={() =>
+					window.open(
+						"https://github.com/leostelon/dedocker",
+						"_blank"
+					)
+				}
 			>
-				🎗️ Things might break 🎗️
+				✨ Please go through docs if your unfamilar with Dedocker ✨
 			</Box>
 			<Box
 				position={"absolute"}
@@ -109,7 +116,16 @@ export const Navbar = () => {
 				>
 					<Box className="navlist">
 						<p onClick={() => window.location.replace("/explore")}>Explore</p>
-						<p>Github</p>
+						<p
+							onClick={() =>
+								window.open(
+									"https://github.com/leostelon/dedocker",
+									"_blank"
+								)
+							}
+						>
+							Github
+						</p>
 					</Box>
 					{!connectedToSite ? (
 						<Box onClick={connectSite} className="upload-button">
