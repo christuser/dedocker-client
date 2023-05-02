@@ -54,3 +54,23 @@ export const updateUsername = async function (username) {
         console.log(error.message)
     }
 }
+
+export const enablePremium = async function (user) {
+    try {
+        let token = localStorage.getItem("token");
+
+        const response = await axios.get(SERVER_URL + "/user/enablepremium", {
+            headers: {
+                "Content-Type": `application/json`,
+                Authorization: "Bearer " + token
+            }
+        }).catch(er => {
+            alert(er.response.data.message)
+        })
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
