@@ -12,6 +12,7 @@ import { UpdateNameDialog } from "./UpdateNameDialog";
 export const Navbar = () => {
 	const [updateName, setUpdateName] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
+	const [user, setUser] = useState({});
 	const open = Boolean(anchorEl);
 	const navigate = useNavigate();
 	const [connectedToSite, setConnectedToSite] = useState(false);
@@ -43,6 +44,7 @@ export const Navbar = () => {
 
 	async function checkAndUpdateNameDialog(address) {
 		const user = await getUser(address);
+		setUser(user);
 		if (!user.updatedUsername) {
 			setUpdateName(true);
 		}
@@ -77,10 +79,7 @@ export const Navbar = () => {
 					cursor: "pointer",
 				}}
 				onClick={() =>
-					window.open(
-						"https://github.com/leostelon/dedocker",
-						"_blank"
-					)
+					window.open("https://github.com/leostelon/dedocker", "_blank")
 				}
 			>
 				✨ Please go through docs if your unfamilar with Dedocker ✨
@@ -105,7 +104,10 @@ export const Navbar = () => {
 					}}
 					style={{ cursor: "pointer" }}
 				>
-					<h1>⚡Dedocker</h1>
+					<h1 style={{ alignItems: "flex-start", display: "flex" }}>
+						⚡Dedocker{" "}
+						{user.premium ? <span className="premium-tag">premium</span> : ""}
+					</h1>
 				</div>
 				<div
 					style={{
@@ -118,10 +120,7 @@ export const Navbar = () => {
 						<p onClick={() => window.location.replace("/explore")}>Explore</p>
 						<p
 							onClick={() =>
-								window.open(
-									"https://github.com/leostelon/dedocker",
-									"_blank"
-								)
+								window.open("https://github.com/leostelon/dedocker", "_blank")
 							}
 						>
 							Github

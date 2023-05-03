@@ -11,6 +11,7 @@ import { MdContentCopy } from "react-icons/md";
 import { TagsDialog } from "../components/TagsDialog";
 import { Loader } from "../components/Loader";
 import EmptyBox from "../assets/629-empty-box.gif";
+import { MakePrivateButton } from "../components/MakePrivateButton";
 
 export const Profile = () => {
 	const [loading, setLoading] = useState(true);
@@ -157,7 +158,13 @@ export const Profile = () => {
 									}}
 								>
 									<img width={"100px"} src={EmptyBox} alt="empty box" />
-									<h3 style={{ color: "grey",marginTop:"12px", textAlign: "center" }}>
+									<h3
+										style={{
+											color: "grey",
+											marginTop: "12px",
+											textAlign: "center",
+										}}
+									>
 										You have 0 images, Try uploading images from CLI, click
 										settings to know more😃
 									</h3>
@@ -196,15 +203,21 @@ export const Profile = () => {
 												</Box>
 												<Code text={`dedocker pull ${img.name}:${img.tag}`} />
 											</Box>
-											<p
-												style={{
+											<Box
+												display="flex"
+												justifyContent="space-between"
+												alignItems={"center"}
+												sx={{
 													marginTop: "12px",
-													fontWeight: "500",
+													fontWeight: "600",
 													fontSize: "12px",
 												}}
 											>
-												Uploaded at {new Date(img.timestamp).toDateString()}
-											</p>
+												<p>
+													Uploaded at {new Date(img.timestamp).toDateString()}
+												</p>
+												<MakePrivateButton image={img} />
+											</Box>
 										</Box>
 									);
 								})

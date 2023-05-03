@@ -26,7 +26,14 @@ export const searchRepositories = async function (name) {
 
 export const userRepositories = async function (user) {
     try {
-        const response = await axios.get(SERVER_URL + "/repository/user/" + user)
+        let token = localStorage.getItem("token");
+
+        const response = await axios.get(SERVER_URL + "/repository/user/" + user, {
+            headers: {
+                "Content-Type": `application/json`,
+                Authorization: "Bearer " + token
+            }
+        })
         if (response.status === 200) {
             return response.data.repositories;
         }
@@ -43,5 +50,25 @@ export const getRepoTags = async function (name) {
         }
     } catch (error) {
         console.log(error.message);
+    }
+}
+
+export const updatePrivateRepo = async function (img) {
+    try {
+        let token = localStorage.getItem("token");
+
+        const response = await axios.post(SERVER_URL + `/repository/${img.private ? "public" : "private"}`, { id: img.id }, {
+            headers: {
+                "Content-Type": `application/json`,
+                Authorization: "Bearer " + token
+            }
+        }).catch(er => {
+            alert(er.response.data.message)
+        })
+        if (response.status === 200) {
+            return response.data;
+        }
+    } catch (error) {
+        console.log(error.message)
     }
 }
