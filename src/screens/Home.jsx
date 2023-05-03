@@ -1,4 +1,4 @@
-import "../App.css";
+import "../styles/app-body.css";
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { TbSearch } from "react-icons/tb";
@@ -45,12 +45,21 @@ export const Home = () => {
 					<Navbar />
 					<Box className="app-body">
 						<Box className="body">
-							<Box className="main-title">
+							<Box className="home-main-title">
 								<p className="nft-title">Decentralized docker registry</p>
 								<p>
-									<span className="nft-title">powered by Spheron</span>
+									<span className="nft-title">Pay once, free forever.</span>
 								</p>
 							</Box>
+							<p
+								className="home-main-title"
+								style={{
+									fontSize: "12px",
+									fontWeight: "600",
+								}}
+							>
+								*Free for public repos, premium to make it private.
+							</p>
 							{/* Search Bar */}
 							<Box
 								sx={{

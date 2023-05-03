@@ -8,17 +8,17 @@
 	max-width: 1080px;
 }
 
-.body .main-title {
+.body .home-main-title {
 	font-weight: 900;
 	font-size: 50px;
 	color: #292929;
-	line-height: 55px;
+	line-height: 50px;
 	word-spacing: 8px;
 	text-align: center;
-	animation: title-move 2s forwards;
+	animation: title-move3 2s forwards;
 }
 
-.body .nft-title {
+.app-body .nft-title {
 	background: linear-gradient(45deg, #ff92a2, #f45966, #e21143);
 	background-clip: text;
 	color: transparent;
@@ -28,8 +28,7 @@
 }
 
 .body .search {
-	margin-top: 32px;
-	animation: title-move 2s forwards;
+	animation: title-move3 2s forwards;
 }
 .body .search input:focus {
 	outline: none;
@@ -54,11 +53,11 @@
 	cursor: pointer;
 }
 
-@keyframes title-move {
+@keyframes title-move3 {
 	from {
 		transform: translate(0px, 0px);
 	}
 	to {
-		transform: translate(0px, -100px);
+		transform: translate(0px, -70px);
 	}
 }
