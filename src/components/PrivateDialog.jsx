@@ -51,6 +51,7 @@ export const PrivateDialog = ({ image, isOpen, handleExternalClose }) => {
 				.on("receipt", async function (receipt) {
 					await enablePremium();
 					setLoading(false);
+					alert("You have purchased premium🥳🍾");
 					window.location.reload();
 				});
 			console.log(resp);
