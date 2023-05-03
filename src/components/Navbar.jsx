@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Menu, MenuItem } from "@mui/material";
+import { Box, Dialog, Menu, MenuItem } from "@mui/material";
 import { BsPerson } from "react-icons/bs";
 import BgImg from "../assets/background-spheron.png";
 import { connectWalletToSite, getWalletAddress } from "../utils/wallet";
@@ -8,12 +8,14 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { MdOutlinePersonOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { UpdateNameDialog } from "./UpdateNameDialog";
+import { PremiumTemplate } from "./PremiumTemplate";
 
 export const Navbar = () => {
 	const [updateName, setUpdateName] = useState(false);
 	const [anchorEl, setAnchorEl] = useState(null);
 	const [user, setUser] = useState({});
 	const open = Boolean(anchorEl);
+	const [premiumOpen, setPremiumOpen] = useState(false);
 	const navigate = useNavigate();
 	const [connectedToSite, setConnectedToSite] = useState(false);
 
@@ -22,6 +24,9 @@ export const Navbar = () => {
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
+	};
+	const handlePremiumClose = () => {
+		setPremiumOpen(false);
 	};
 
 	async function connectSite() {
@@ -117,6 +122,28 @@ export const Navbar = () => {
 					}}
 				>
 					<Box className="navlist">
+						<Dialog
+							open={premiumOpen}
+							onClose={handlePremiumClose}
+							fullWidth
+							maxWidth="xs"
+						>
+							<PremiumTemplate />
+						</Dialog>
+						{!user.premium && (
+							<p
+								className="premium-tag"
+								style={{
+									fontSize: "14px",
+									textDecoration: "underline",
+									textDecorationColor: "violet",
+								}}
+								onClick={() => setPremiumOpen(true)}
+							>
+								Try Premium
+							</p>
+						)}
+
 						<p onClick={() => window.location.replace("/explore")}>Explore</p>
 						<p
 							onClick={() =>
