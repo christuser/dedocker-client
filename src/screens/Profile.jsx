@@ -182,7 +182,20 @@ export const Profile = () => {
 												<Box>
 													<h3>{img.name}</h3>
 													<Box>
-														<Box className="tag">:{img.tag}</Box>
+														<Box display={"flex"}>
+															<Box className="tag" sx={{ mr: "4px" }}>
+																:{img.tag}
+															</Box>
+
+															{img.private && (
+																<Box
+																	className="tag"
+																	sx={{ backgroundColor: "#ff1616 !important" }}
+																>
+																	Private
+																</Box>
+															)}
+														</Box>
 														<p
 															style={{
 																fontWeight: "500",

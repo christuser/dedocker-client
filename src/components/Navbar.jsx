@@ -199,7 +199,7 @@ export const Navbar = () => {
 								</MenuItem>
 								<MenuItem
 									onClick={() => {
-										localStorage.removeItem("token");
+										localStorage.clear()
 										window.location.replace("/");
 										setAnchorEl(null);
 									}}

@@ -10,7 +10,7 @@ contract Dedocker {
     }
 
     function buyDedocker() external payable {
-        require(msg.value == 5 ether, "Please send 5 SHM!");
+        require(msg.value == 1 ether, "Please send 1 SHM!");
         members[msg.sender] = true;
     }
 

@@ -2,7 +2,7 @@ import { Box, CircularProgress } from "@mui/material";
 import React, { useState } from "react";
 import { enablePremium } from "../api/user";
 import Web3 from "web3";
-import { getWalletAddress } from "../utils/wallet";
+import { getWalletAddress, switchChain } from "../utils/wallet";
 import DedockerInterface from "../contracts/Dedocker.json";
 
 export const PremiumTemplate = () => {
@@ -11,10 +11,11 @@ export const PremiumTemplate = () => {
     async function buyPremium() {
 		try {
 			setLoading(true);
-			const price = Web3.utils.toWei("5");
+			await switchChain()
+			const price = Web3.utils.toWei("1");
 			const contract = new window.web3.eth.Contract(
 				DedockerInterface.abi,
-				"0xd6cBA51A40E163d30D8A47c40E2635e1F7575186"
+				"0x2a4b87d7825Fc7C56ecb6B7c0932449a6D6EF663"
 			);
 			const currentAddress = await getWalletAddress();
 
@@ -62,7 +63,7 @@ export const PremiumTemplate = () => {
 			</Box>
 			<br />
 			<h1 style={{ fontSize: "38px" }}>
-				5 SHM<span style={{ fontSize: "12px" }}> /forever</span>
+				1 SHM<span style={{ fontSize: "12px" }}> /forever</span>
 			</h1>
 			<Box
 				sx={{

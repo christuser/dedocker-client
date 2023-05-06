@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import { ChainsConfig } from "../constants";
 
 export async function connectWalletToSite() {
 	try {
@@ -20,6 +21,29 @@ export async function connectWalletToSite() {
 			alert(e.message);
 		}
 		return false;
+	}
+}
+
+export async function switchChain() {
+	const config = { ...ChainsConfig["SHARDEUM_BETA"] };
+	config.chainId = Web3.utils.toHex(ChainsConfig["SHARDEUM_BETA"].chainId);
+
+	try {
+		await window.ethereum.request({
+			method: "wallet_switchEthereumChain",
+			params: [{ chainId: config.chainId }],
+		});
+	} catch (error) {
+		if (error.code === 4902) {
+			try {
+				await window.ethereum.request({
+					method: "wallet_addEthereumChain",
+					params: [config],
+				});
+			} catch (addError) {
+				console.error(addError);
+			}
+		}
 	}
 }
 

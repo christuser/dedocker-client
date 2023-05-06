@@ -14,7 +14,7 @@ export const getRepositories = async function () {
 
 export const searchRepositories = async function (name) {
     try {
-        const response = await axios.get(SERVER_URL + "/repository/" + name)
+        const response = await axios.get(SERVER_URL + "/repository?name=" + name)
         if (response.status === 200) {
             return response.data.repositories;
         }
@@ -44,7 +44,7 @@ export const userRepositories = async function (user) {
 
 export const getRepoTags = async function (name) {
     try {
-        const response = await axios.get(SERVER_URL + "/repository/tags/" + name)
+        const response = await axios.get(SERVER_URL + "/repository/tags?name=" + name)
         if (response.status === 200) {
             return response.data.repositories;
         }
