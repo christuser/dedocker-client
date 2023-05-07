@@ -44,7 +44,14 @@ export const userRepositories = async function (user) {
 
 export const getRepoTags = async function (name) {
     try {
-        const response = await axios.get(SERVER_URL + "/repository/tags?name=" + name)
+        let token = localStorage.getItem("token");
+
+        const response = await axios.get(SERVER_URL + "/repository/tags?name=" + name,{
+            headers: {
+                "Content-Type": `application/json`,
+                Authorization: "Bearer " + token
+            }
+        })
         if (response.status === 200) {
             return response.data.repositories;
         }
